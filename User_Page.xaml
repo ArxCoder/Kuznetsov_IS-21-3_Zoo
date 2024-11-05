@@ -1,0 +1,77 @@
+﻿<Window x:Class="Kuznetsov_IS_21_3_Zoo.User_Page"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kuznetsov_IS_21_3_Zoo"
+        mc:Ignorable="d"
+        Title="User_Page" Height="500" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1, 0" StartPoint="0, 1">
+            <GradientStop Color="#FFA3A433" Offset="0.11"/>
+            <GradientStop Color="#FF339842" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Личный кабинет" FontSize="20" FontFamily="Tahoma" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="200"/>
+        <TextBlock Grid.Row="0" x:Name="User_Name" Text="фыв" TextWrapping="Wrap" Width="200" FontSize="14" FontFamily="Tahoma" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"/>
+        <Image Grid.Row="0" x:Name="User_Image" Source="/Resources/User.png" Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="200,10,0,0"/>
+
+        <WrapPanel Orientation="Vertical" Width="200" Grid.Row="1" HorizontalAlignment="Left">
+            <Label Content="Имя пользователя: " FontFamily="Tahoma" FontWeight="Bold" FontSize="16"/>
+            <TextBox x:Name="CurrentUser_Name" Height="30" Margin="5,0,5,0">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            
+            <Label Content="EMail пользователя: " FontFamily="Tahoma" FontWeight="Bold" FontSize="16"/>
+            <TextBox x:Name="CurrentUser_EMail" Height="30" Margin="5,0,5,0">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+            </TextBox>
+    
+            <Label Content="Пароль пользователя: " FontFamily="Tahoma" FontWeight="Bold" FontSize="16"/>
+            <TextBox x:Name="CurrentUser_Password" Height="30" Margin="5,0,5,0">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+            </TextBox>
+
+            <Button x:Name="Change_Photo" Content="Изменить фотографию" FontFamily="Tahoma" FontWeight="Bold" FontSize="14" Width="190" Height="30" Margin="0,30,0,0" Click="Change_Photo_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="Save_Changes" Content="Сохранить" FontFamily="Tahoma" FontWeight="Bold" FontSize="14" Width="190" Height="30" Margin="0,20,0,0" Click="Save_Changes_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="Go_To_Main" Content="Вернуться на главную" FontFamily="Tahoma" FontWeight="Bold" FontSize="14" Width="190" Height="30" Margin="0,20,0,0" Click="Go_To_Main_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </WrapPanel>
+    </Grid>
+</Window>

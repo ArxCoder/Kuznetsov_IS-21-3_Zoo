@@ -1,0 +1,196 @@
+﻿<Window x:Class="Kuznetsov_IS_21_3_Zoo.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kuznetsov_IS_21_3_Zoo"
+        mc:Ignorable="d"
+        Title="Виртуальный зоопарк" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Name="ButtonTemplate" x:Key="Slide_Menu_Btn" TargetType="Button">
+            <Grid x:Name="Btn" Height="45">
+                <Border>
+                    <StackPanel x:Name="AnimalPanel" Orientation="Horizontal">
+                        <Image Source="{DynamicResource ResourceKey=Img}" VerticalAlignment="Center"
+                       HorizontalAlignment="Left" Width="30" Height="30" Stretch="Fill"
+                       Margin="20, 0, 0, 0"/>
+
+                        <Label Content="{TemplateBinding Content}" Margin="10, 0, 0, 0" Foreground="#FF05480D" Background="Transparent" FontSize="14" VerticalAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=Btn}" Value="true">
+                                            <Setter Property="Foreground" Value="#FF498C51"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+            Mode=FindAncestor,
+            AncestorType={x:Type Button}},
+            Path=IsFocused}" Value="true">
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                    </StackPanel>
+                </Border>
+
+                <Border x:Name="Mouse_Over_Border" Background="#FF8D8D8D">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Opacity" Value="0"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=Btn}" Value="true">
+                                    <Setter Property="Opacity" Value="0.1"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+                <Border x:Name="Is_Selected_Border" Background="#FF8D8D8D">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Opacity" Value="0"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+                            Mode=FindAncestor,
+                            AncestorType={x:Type Button}},
+                            Path=IsFocused}" Value="true">
+                                    <Setter Property="Opacity" Value="0.1"/>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+                <Border x:Name="Is_Selected_Border2" Background="Transparent">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Setter Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter Property="BorderBrush" Value="#FF00AEFF"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource
+            Mode=FindAncestor,
+            AncestorType={x:Type Button}},
+            Path=IsFocused}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="1,0" StartPoint="0,1">
+            <GradientStop Color="#FFA3A433" Offset="0.11"/>
+            <GradientStop Color="#FF339842" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border BorderBrush="#FF757171" BorderThickness="1">
+            <WrapPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Height="70" Width="800" Grid.Row="0">
+                <Label Content="Добро пожаловать:" FontSize="16" Foreground="#FF05480D" FontFamily="Segoe UI"/>
+                <Label x:Name="UserName" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontFamily="Segoe UI" FontSize="16" FontWeight="Bold" Foreground="#FF05480D"/>
+            </WrapPanel>
+        </Border>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <Label Content="Виртуальный зоопарк" HorizontalAlignment="Center" Margin="60,5,0,0" FontFamily="Segoe UI" Foreground="#FF05480D" FontSize="36"/>
+            <Image HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Source="/Resources/logout.png" Margin="70,0,0,0" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+            <Image HorizontalAlignment="Right" VerticalAlignment="Center" Width="30" Height="30" Source="/Resources/user.png" Margin="10,0,0,0" MouseLeftButtonUp="Image_MouseLeftButtonUp_1"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Width="200" Grid.Row="1" HorizontalAlignment="Left">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="Animals" Orientation="Vertical" HorizontalAlignment="Left" Width="200" Grid.Row="1">
+                    <Button x:Name="Button1" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Капибара" Click="Capybara_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Capybara.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button2" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Сине-желтый Ара" Click="Button2_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Ara ararauna.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button3" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Утконос" Click="Button3_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Duckbill.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button4" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Лиса обыкновенная" Click="Button4_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Fox.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button5" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Жираф" Click="Button5_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Giraffe.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button6" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Сурикат" Click="Button6_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/meerkat.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button7" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Енот полоскун" Click="Button7_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Procyon.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button8" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Африканский слон" Click="Button8_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/The African Elephant.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button9" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Волк" Click="Button9_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Wolf.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                    <Button x:Name="Button10" Template="{StaticResource ResourceKey=Slide_Menu_Btn}" Content="Зебра" Click="Button10_Click">
+                        <Button.Resources>
+                            <ImageSource x:Key="Img">Images/Zebra.jpg</ImageSource>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+            <StackPanel Width="600" HorizontalAlignment="Left" VerticalAlignment="Top" Height="175" Orientation="Horizontal">
+                <Image x:Name="AnimalImage" Width="300" Height="175" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,0,0,0">
+                </Image>
+                <StackPanel Orientation="Vertical">
+                    <Label x:Name="FactsText" Visibility="Hidden" Margin="5,0,0,0" Content="Интересные факты:" Foreground="White" FontFamily="Segoe UI" FontWeight="Bold"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <TextBlock x:Name="Facts" Margin="10,0,0,0" Width="250" MaxWidth="250" Foreground="White" TextWrapping="Wrap" TextAlignment="Justify"/>
+                    </ScrollViewer>
+                </StackPanel>
+
+            </StackPanel>
+            <Label Visibility="Hidden" x:Name="AboutText" Content="Описание:" Margin="5,0,0,0" Foreground="White" FontFamily="Segoe UI" FontWeight="Bold" />
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <TextBlock x:Name="About" HorizontalAlignment="Left" Width="560" MaxWidth="560" Height="150" Margin="10,5,10,5" Foreground="White" TextWrapping="Wrap" TextAlignment="Justify"/>
+            </ScrollViewer>
+
+        </StackPanel>
+    </Grid>
+</Window>
