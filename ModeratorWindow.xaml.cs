@@ -96,7 +96,10 @@ namespace Kuznetsov_IS_21_3_Zoo
                 UsersList.Items.Clear();
                 for (int i = 0; i < DatabaseUsersList.Count; i++)
                 {
-                    UsersList.Items.Add("Имя: " + DatabaseUsersList[i].Name + " Статус: " + DatabaseUsersList[i].Status + " Логин: " + DatabaseUsersList[i].Login + " Почта: " + DatabaseUsersList[i].Email);
+                    UsersList.Items.Add("Имя: " + DatabaseUsersList[i].Name + 
+                        " Статус: " + DatabaseUsersList[i].Status + 
+                        " Логин: " + DatabaseUsersList[i].Login + 
+                        " Почта: " + DatabaseUsersList[i].Email);
                 }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
